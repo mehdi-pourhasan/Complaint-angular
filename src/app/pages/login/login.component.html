@@ -6,7 +6,8 @@
                     class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form id="loginFrm">
+                @if (isLoginFormVisible) {
+                <form id="loginFrm" #LgnForm="ngForm">
                     <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
 
 
@@ -20,27 +21,31 @@
                     </section>
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input type="email" id="form3Example3" class="form-control form-control-lg"
-                            placeholder="Enter a valid email address" />
+                        <input type="email" id="emailAddress" class="form-control form-control-lg"
+                            [(ngModel)]="loginObj.userName" name="userName" placeholder="Enter a valid email address" />
                         <label class="form-label" for="form3Example3">User Name </label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-3">
-                        <input type="password" id="form3Example4" class="form-control form-control-lg"
-                            placeholder="Enter password" />
-                        <label class="form-label" for="form3Example4">Password</label>
+                        <input type="password" id="password" class="form-control form-control-lg"
+                            [(ngModel)]="loginObj.password" name="password" placeholder="Enter password" />
+                        <label class="form-label" for="password">Password</label>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
-                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!" class="link-danger"
-                                onclick="showRegister()">Register</a></p>
+                            style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                            (click)="onLogin(LgnForm)">Login</button>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a type="button"
+                                class=" link-danger" style="cursor: pointer;" (click)="showRegister()">Register</a></p>
                     </div>
 
                 </form>
-                <form id="registerFrm">
+                }
+
+                @if (!isLoginFormVisible) {
+                <form id="registerFrm" #RegForm="ngForm">
                     <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                         <p class="lead fw-normal mb-0 me-3"> </p>
 
@@ -54,35 +59,40 @@
                     </section>
                     <!-- Email input -->
                     <div class="form-outline ">
-                        <input type="email" id="form3Example3" class="form-control form-control-lg"
-                            placeholder="Enter email" />
-                        <label class="form-label" for="form3Example3">Email address</label>
+                        <input type="email" id="emailAddress" [(ngModel)]="registerObj.emailId"
+                            class="form-control form-control-lg" placeholder="Enter email" name="emailId" />
+
+
+                        <label class="form-label" for="emailAddress">Email address</label>
                     </div>
                     <div class="form-outline ">
-                        <input type="email" id="form3Example3" class="form-control form-control-lg"
-                            placeholder="Enter Full Name" />
-                        <label class="form-label" for="form3Example3">Full Name</label>
+                        <input type="text" id="fullName" class="form-control form-control-lg"
+                            placeholder="Enter Full Name" [(ngModel)]="registerObj.fullName" name="fullName" />
+                        <label class="form-label" for="fullName">Full Name</label>
                     </div>
                     <div class="form-outline ">
-                        <input type="email" id="form3Example3" class="form-control form-control-lg"
-                            placeholder="Enter User Name" />
-                        <label class="form-label" for="form3Example3">User Name</label>
+                        <input type="text" id="userName" class="form-control form-control-lg"
+                            placeholder="Enter User Name" [(ngModel)]="registerObj.userName" name="userName" />
+                        <label class="form-label" for="userName">User Name</label>
                     </div>
                     <div class="form-outline">
-                        <input type="password" id="form3Example4" class="form-control form-control-lg"
-                            placeholder="Enter password" />
-                        <label class="form-label" for="form3Example4">Password</label>
+                        <input type="password" id="password" class="form-control form-control-lg"
+                            placeholder="Enter password" [(ngModel)]="registerObj.password" name="password" />
+                        <label class="form-label" for="password">Password</label>
                     </div>
 
 
                     <div class="text-center text-lg-start mt-2 pt-2">
                         <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
-                            style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">If You Alreay Have an Account? <a href="#!"
-                                class="link-danger" onclick="showLogin()">Login</a></p>
+                            style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                            (click)="onRegister(RegForm)">Register</button>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">If You Alreay Have an Account? <a class="link-danger"
+                                (click)="showLogin()" style="cursor: pointer;">Login</a></p>
                     </div>
 
                 </form>
+                }
+
             </div>
         </div>
     </div>
