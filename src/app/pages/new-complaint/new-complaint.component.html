@@ -11,16 +11,23 @@
             <div class="row">
                 <div class="col-6">
                     <div data-mdb-input-init class="form-outline ">
-                        <select name="" id="" class="form-select">
+                        <select name="parentDepartmentID" [(ngModel)]="parentDepartmentID" class="form-select"
+                            (change)="getChildDepartment()">
                             <option value="">Select </option>
+                            @for (item of parentDepartmentList; track item.departmentId ) {
+                            <option [value]="item.departmentId">{{item.departmentName}}</option>
+                            }
                         </select>
                         <label class="form-label" for="form3Example3">Department</label>
                     </div>
                 </div>
                 <div class="col-6">
                     <div data-mdb-input-init class="form-outline ">
-                        <select name="" id="" class="form-select">
+                        <select name="childDeptId" [(ngModel)]="complaintObj.childDeptId" class="form-select">
                             <option value="">Select </option>
+                            @for (item of childDepartmentList; track item.childDeptId ) {
+                            <option [value]="item.childDeptId ">{{item.departmentName}}</option>
+                            }
                         </select>
                         <label class="form-label" for="form3Example3">Sub Department</label>
                     </div>
@@ -28,34 +35,40 @@
             </div>
             <!-- Email input -->
             <div data-mdb-input-init class="form-outline ">
-                <input type="text" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Complaint Title</label>
+                <input type="text" name="complaintTitle" [(ngModel)]="complaintObj.complaintTitle"
+                    class="form-control" />
+                <label class="form-label">Complaint Title</label>
             </div>
 
             <!-- Password input -->
             <div data-mdb-input-init class="form-outline mb-3">
-                <textarea placeholder="Enter Complaint Details" class="form-control"></textarea>
-                <label class="form-label" for="form3Example4">Details</label>
+                <textarea name="complaintDetails" [(ngModel)]="complaintObj.complaintDetails"
+                    placeholder="Enter Complaint Details" class="form-control"></textarea>
+                <label class="form-label">Details</label>
             </div>
             <div class="row">
                 <div class="col-8">
                     <div class="form-check mb-0">
-                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                        <label class="form-check-label" for="form2Example3">
+                        <input class="form-check-input me-2" type="checkbox" value="" name="isAlreadyReportedThis"
+                            [(ngModel)]="complaintObj.isAlreadyReportedThis" />
+                        <label class="form-check-label">
                             Have you Already Raised Complaint For this
                         </label>
                     </div>
                 </div>
                 <div class="col-4">
+                    @if (complaintObj.isAlreadyReportedThis) {
                     <div data-mdb-input-init class="form-outline ">
-                        <input type="text" id="form3Example3" class="form-control" placeholder="" readonly />
-                        <label class="form-label" for="form3Example3">Old Ticket No</label>
+                        <input type="text" name="oldComplaintNo" [(ngModel)]="complaintObj.oldComplaintNo"
+                            class="form-control" placeholder="" readonly />
+                        <label class="form-label">Old Ticket No</label>
                     </div>
+                    }
                 </div>
             </div>
             <div class="text-center text-lg-start mt-1 pt-2">
                 <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Create</button>
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="onSubmitComplaint()">Create</button>
 
             </div>
 

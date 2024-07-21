@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MasterServiceService } from '../../services/master-service.service';
+import { MasterService } from '../../services/master.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  masterService = inject(MasterServiceService);
+  masterService = inject(MasterService);
   router = inject(Router);
   isLoginFormVisible: boolean = true;
 
