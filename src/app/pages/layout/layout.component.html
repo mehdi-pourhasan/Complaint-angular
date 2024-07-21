@@ -13,13 +13,33 @@
         <!-- Right -->
         <div>
 
-            <a href="#" class="text-white me-4">
+
+            <a [routerLink]="['/dashboard']" class="text-white me-4">
+                <button class="btn btn-success btn-sm">Dashboard</button>
+            </a>
+
+            <a [routerLink]="['/new-complaint']" class="text-white me-4">
                 <button class="btn btn-success btn-sm">New Complaint</button>
             </a>
 
-            <a href="#" class="text-white me-4">
-                <i class="fa fa-user"></i> loggedUser
+            <a [routerLink]="['/complaint-list']" class="text-white me-4">
+                <button class="btn btn-success btn-sm">Complaint List</button>
             </a>
+
+            @if (loggedInUser.role === 'admin') {
+
+            <a [routerLink]="['/department']" class="text-white me-4">
+                <button class="btn btn-success btn-sm">Department</button>
+            </a>
+            }
+
+
+            <a class="text-white me-4">
+                <i class="fa fa-user"></i> {{loggedInUser?.emailId}}
+            </a>
+
+            <button class="btn btn-success btn-sm" (click)="logoff()">Logout</button>
+
         </div>
         <!-- Right -->
     </div>
