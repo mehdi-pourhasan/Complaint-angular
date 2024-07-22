@@ -30,4 +30,14 @@ export class MasterService {
   CreateNewComplaint(obj: any) {
     return this.http.post(`${this.ApiUrl}CreateNewComplaint`, obj);
   }
+
+  getAllComplaints() {
+    return this.http.get(`${this.ApiUrl}getAllComplaints`);
+  }
+
+  getAllComplaintsByUserId(id: number) {
+    return this.http.get(
+      `${this.ApiUrl}getComplaintsCreatedByUserId?userId=${id}`
+    );
+  }
 }

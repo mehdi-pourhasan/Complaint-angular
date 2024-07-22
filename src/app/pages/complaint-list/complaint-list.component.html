@@ -2,182 +2,98 @@
     <!-- ADVERTISERS SERVICE CARD -->
     <div class="container" style="height: 500px;overflow-x: auto;">
         <div class="row">
+            @for (item of complaintLists; track $index) {
             <div class="col-3">
                 <div class="card dark">
                     <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
+                            <h5 class="card-title">{{item.complaintTitle}}</h5>
+                            <p class="card-text">{{item.complaintDetails}}</p>
                         </div>
                         <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
+                            <div>{{item.createdDate | date: 'dd-MMM-yy'}}</div>
+                            <a (click)="openModal(item)" class="btn btn-light">Open</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
+            }
+        </div>
+    </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Complaints Details</h4>
+                <button (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-6">
+                            <div data-mdb-input-init class="form-outline ">
+                                <input type="text" name="complaintTitle" [value]="complaintObj.parentDepartmentName"
+                                    class="form-control">
+                                <label class="form-label">Department</label>
+                            </div>
                         </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
+                        <div class="col-6">
+                            <div data-mdb-input-init class="form-outline ">
+                                <input type="text" name="complaintTitle" [value]="complaintObj.departName"> <label
+                                    class="form-label">Sub Department</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
+                    <!-- Email input -->
+                    <div data-mdb-input-init class="form-outline ">
+                        <input type="text" name="complaintTitle" [value]="complaintObj.complaintTitle"
+                            class="form-control" />
+                        <label class="form-label">Complaint Title</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div data-mdb-input-init class="form-outline mb-3">
+                        <textarea name="complaintDetails" [value]="complaintObj.complaintDetails"
+                            placeholder="Enter Complaint Details" class="form-control"></textarea>
+                        <label class="form-label">Details</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="form-check mb-0">
+                                <input class="form-check-input me-2" type="checkbox" value=""
+                                    name="isAlreadyReportedThis" [value]="complaintObj.isAlreadyReportedThis" />
+                                <label class="form-check-label">
+                                    Have you Already Raised Complaint For this
+                                </label>
+                            </div>
                         </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
+                        <div class="col-4">
+                            <div data-mdb-input-init class="form-outline ">
+                                <input type="text" name="oldComplaintNo" [value]="complaintObj.oldComplaintNo"
+                                    class="form-control" placeholder="" readonly />
+                                <label class="form-label">Old Ticket No</label>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                </form>
             </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
-                        </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
-                        </div>
-                    </div>
-                </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="closeModal()">Close</button>
             </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
-                        </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
-                        </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
-                        </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
-                        </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
-                        </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
-                        </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card dark">
-                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="text-section">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example
-                                content.</p>
-                        </div>
-                        <div class="cta-section">
-                            <div>12-12-24</div>
-                            <a href="#" class="btn btn-light">Open</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
